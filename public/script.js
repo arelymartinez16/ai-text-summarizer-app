@@ -63,3 +63,5 @@ function submitData(e) {
     })
     .catch(error => console.log(error.message));
 }
+
+// Next steps: Translate summary to a different language
