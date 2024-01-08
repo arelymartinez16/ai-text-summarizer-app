@@ -35,7 +35,10 @@ async function translateText(text, targetLanguage) {
   };
   try {
     const response = await axios.request(config);
-    console.log(JSON.stringify(response.data));
+    // console.log(JSON.stringify(response.data));
+    console.log(JSON.stringify(response.data[0].translation_text));
+    return response.data[0].translation_text
+    // return response;
   }
   catch (error) {
     console.log(error);

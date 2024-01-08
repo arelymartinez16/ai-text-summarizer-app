@@ -4,6 +4,8 @@ const submitButton = document.getElementById("submit-button");
 
 const summarizedTextArea = document.getElementById("summary");
 
+const translateTextArea = document.getElementById("translated-text");
+
 const translatedButton = document.getElementById("translate-button");
 
 const languageSelect = document.getElementById('language-select');
@@ -80,6 +82,8 @@ function submitData(e) {
 
 // Next steps: Translate summary to a different language
 function translateText(e) {
+  console.log('Translate button clicked');
+
   const selectedLanguage = languageSelect.value;
   
   translatedButton.classList.add("submit-button--loading");
@@ -89,6 +93,9 @@ function translateText(e) {
   myHeaders.append("Authorization", "Bearer " + token);
 
   const text_to_translate = summarizedTextArea.value;
+
+  console.log("Text to translate: " + text_to_translate);
+  console.log("Selected language: " + selectedLanguage);
 
   var raw = JSON.stringify({
     "text_to_translate": text_to_translate,
@@ -103,9 +110,14 @@ function translateText(e) {
   };
 
   fetch("/translate", requestOptions)
-    .then(response => response.text())
-    .then(translatedText => {
-      summarizedTextArea.value = translatedText;
+    .then(response => {
+      // console.log('Translation API Response:', response);
+      response.text()
+    })
+    .then(translateTxt => {
+      console.log('Translated Text: ', translateTxt);
+      translateTextArea.value = translateTxt;
+      console.log(translateTextArea.value)
       // Stop the spinning loading animation
       translatedButton.classList.remove("submit-button--loading");
 

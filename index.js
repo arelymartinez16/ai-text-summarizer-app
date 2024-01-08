@@ -30,19 +30,36 @@ app.post('/summarize', (req, res) => {
     });
 });
 
-app.post("/translate", (req, res) => {
+// app.post("/translate", (req, res) => {
+//   const text = req.body.text_to_translate;
+//   const targetLanguage = req.body.target_language;
+
+//   translateText(text, targetLanguage)
+//     .then(response => {
+//       res.send(response);
+//       console.log("Received translation request")
+//     })
+//     .catch(error => {
+//       console.log(error.message);
+//     });
+// });
+app.post("/translate", async (req, res) => {
   const text = req.body.text_to_translate;
   const targetLanguage = req.body.target_language;
 
-  translateText(text, targetLanguage)
-    .then(response => {
-      res.json(response);
-      console.log("Received translation request")
-    })
-    .catch(error => {
-      console.log(error.message);
-    });
-});
+  try {
+    const translatedText = await translateText(text, targetLanguage);
+
+    // Send the translated text as JSON
+    res.status(200).json({ translatedText: translatedText });
+    console.log("Received translation request");
+  } catch (error) {
+    console.error(error.message);
+
+    // Handle the error and send an appropriate JSON response
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+})
 
 app.get("/getAccessToken", (req, res) => {
   res.json({ token });
