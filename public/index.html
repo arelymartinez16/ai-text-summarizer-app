@@ -9,7 +9,7 @@
   </head>
   <body>
     <h1>AI Text Summarizer App</h1>
-    <p> Welcome to the AI Text Summarizer App! This app leverages the power of Artificial Intelligence APIs to provide concise summaries of long texts. Whether you have a lengthy article, research paper, or any other text document that you want to summarize quickly, our app can assist you. </p>
+    <p> Welcome to the AI Text Summarizer App! This app leverages the power of Artificial Intelligence APIs to provide concise summaries of long texts. You can also translate the summarized text to a language you prefer. Whether you have a lengthy article, research paper, or any other text document that you want to summarize quickly, our app can assist you. </p>
     <p> Simply paste your text into the text area below and click the "Submit" button. </p>
     <div class="container">
       <div class="text-box">
@@ -19,7 +19,19 @@
         </button>
       </div>
       <div class="text-box"> 
-      <textarea id="summary" name="summarized_text" placeholder="Summarized text will appear here"> </textarea>
+        <textarea id="summary" name="summarized_text" placeholder="Summarized text will appear here"> </textarea>
+        <label for="language-select">Select Language:</label>
+        <select id="language-select">
+          <!-- <option value="en">English</option> -->
+          <option value="es">Spanish</option>
+          <option value="fr">French</option>
+          <option value="it">Italian</option>
+          <option value="zh">Chinese</option>
+          <option value="ja">Japanese</option>
+        </select>
+        <button id="translate-button" class="submit-button">
+          <span class="translate-button-text">Translate</span>
+        </button>
       </div>
     </div>
     <section class="cta-section">

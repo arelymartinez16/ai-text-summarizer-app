@@ -1,13 +1,19 @@
 const express = require('express');
 const app = express();
 const port = 3000;
+const cors = require('cors');
 const summarizeText = require('./summarize.js');
+const translate = require('./translate.js');
 
 // Parses JSON bodies (as sent by API clients)
 app.use(express.json());
 
 // Serves static files from the 'public' directory
 app.use(express.static('public'));
+
+app.use(cors());
+
+const token = process.env['ACCESS_TOKEN']
 
 // Call the Hugging Face Inference API to summarize text by making POST request
 app.post('/summarize', (req, res) => {
@@ -23,6 +29,24 @@ app.post('/summarize', (req, res) => {
       console.log(error.message);
     });
 });
+
+app.post("/translate", (req, res) => {
+  const text = req.body.text_to_translate;
+  const targetLanguage = req.body.target_language;
+
+  translate(text, targetLanguage)
+    .then(response => {
+      res.json(response);
+      console.log("Received translation request")
+    })
+    .catch(error => {
+      console.log(error.message);
+    });
+});
+
+app.get("/getAccessToken", (req, res) => {
+  res.json({ token });
+})
 
 // Start the server
 app.listen(port, () => {
