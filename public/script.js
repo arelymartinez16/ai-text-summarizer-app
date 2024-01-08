@@ -118,7 +118,7 @@ async function fetchToken() {
     const response = await fetch('/getAccessToken'); // This should be the path to your server endpoint
     const data = await response.json();
     token = data.token;
-    console.log(token)
+    // console.log(token)
   } catch (error) {
     console.error('Error fetching access token:', error);
   }

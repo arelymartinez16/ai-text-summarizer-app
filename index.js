@@ -3,7 +3,7 @@ const app = express();
 const port = 3000;
 const cors = require('cors');
 const summarizeText = require('./summarize.js');
-const translate = require('./translate.js');
+const translateText = require('./translate.js');
 
 // Parses JSON bodies (as sent by API clients)
 app.use(express.json());
@@ -34,7 +34,7 @@ app.post("/translate", (req, res) => {
   const text = req.body.text_to_translate;
   const targetLanguage = req.body.target_language;
 
-  translate(text, targetLanguage)
+  translateText(text, targetLanguage)
     .then(response => {
       res.json(response);
       console.log("Received translation request")

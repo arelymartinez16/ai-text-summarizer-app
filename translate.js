@@ -1,6 +1,6 @@
 const axios = require('axios');
 
-async function translate(text, targetLanguage) {
+async function translateText(text, targetLanguage) {
   // Define endpoints
   const languageMappings = {
     zh: 'Helsinki-NLP/opus-mt-en-zh', // English to Chinese
@@ -42,4 +42,4 @@ async function translate(text, targetLanguage) {
   }
 }
 
-module.exports = translate;
+module.exports = translateText;
